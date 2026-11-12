@@ -2,6 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import { AuthDivider } from "@/components/auth-divider";
+import { GoogleSignInButton } from "@/components/google-sign-in-button";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -113,6 +115,8 @@ export function SignUpForm({
               </Link>
             </div>
           </form>
+          <AuthDivider />
+          <GoogleSignInButton />
         </CardContent>
       </Card>
     </div>

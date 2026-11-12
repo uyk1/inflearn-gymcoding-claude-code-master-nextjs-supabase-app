@@ -2,6 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import { AuthDivider } from "@/components/auth-divider";
+import { GoogleSignInButton } from "@/components/google-sign-in-button";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,8 +20,12 @@ import { useState } from "react";
 
 export function LoginForm({
   className,
+  next = "/protected",
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: React.ComponentPropsWithoutRef<"div"> & {
+  // 로그인 후 이동할 경로 (서버에서 검증된 값)
+  next?: string;
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -38,8 +44,8 @@ export function LoginForm({
         password,
       });
       if (error) throw error;
-      // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push("/protected");
+      // 로그인 성공 후 원래 가려던 경로(기본값 /protected)로 이동
+      router.push(next);
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
@@ -103,6 +109,8 @@ export function LoginForm({
               </Link>
             </div>
           </form>
+          <AuthDivider />
+          <GoogleSignInButton next={next} />
         </CardContent>
       </Card>
     </div>
