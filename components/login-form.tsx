@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import { AuthDivider } from "@/components/auth-divider";
-import { GoogleSignInButton } from "@/components/google-sign-in-button";
+import { SocialSignInButtons } from "@/components/social-sign-in-buttons";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -110,7 +110,7 @@ export function LoginForm({
             </div>
           </form>
           <AuthDivider />
-          <GoogleSignInButton next={next} />
+          <SocialSignInButtons next={next} />
         </CardContent>
       </Card>
     </div>
